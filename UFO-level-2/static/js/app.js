@@ -35,15 +35,36 @@ filterButton.on("click", function() {               // Here we have the eventHan
     
     tbody.html("");         // This resets the page to its basic html (i.e. no previously input data into table) so we append to a blank table and not our previously written rows
     
-    // Do the filtering
-    let userInputElement = d3.select("#datetime");                                          // Selecting the user input element
-    let userInputValue = userInputElement.property("value");                                // Selecting the VALUE from our user input element
-    let filteredData = tableData.filter(event => event.datetime === userInputValue);        // filtering our data and assigning to new variable
+    // Get all the filtering elements
+    let userInputDateElement = d3.select("#datetime");                                      // Selecting the user input date element
+    let userInputDateValue = userInputDateElement.property("value");                        // Selecting the VALUE from our user input date element
+    let userInputCityElement = d3.select("#city");                                          // Selecting the user input city element
+    let userInputCityValue = userInputCityElement.property("value");                        // Selecting the VALUE from our user input city element
+    let userInputStateElement = d3.select("#state");                                        // Selecting the user input state element
+    let userInputStateValue = userInputStateElement.property("value");                      // Selecting the VALUE from our user input state element
+    let userInputCountryElement = d3.select("#country");                                    // Selecting the user input country element
+    let userInputCountryValue = userInputCountryElement.property("value");                  // Selecting the VALUE from our user input country element
+    let userInputShapeElement = d3.select("#shape");                                        // Selecting the user input shape element
+    let userInputShapeValue = userInputShapeElement.property("value");                      // Selecting the VALUE from our user input shape element
+
+    let filter = {
+        datetime: userInputDateValue,
+        city: userInputCityValue,
+        state: userInputStateValue,
+        country: userInputCountryValue,
+        shape: userInputShapeValue
+    }
+
+    let filteredData1 = tableData.filter(event => event.datetime === userInputDateValue);        // filtering our data and assigning to new variable
+    let filteredData2 = tableData.filter(event => event.city === userInputCityValue);        // filtering our data and assigning to new variable
+    // let filteredData3 = tableData.filter(event => event.state === userInputDateStateValue);        // filtering our data and assigning to new variable
+    // let filteredData4 = tableData.filter(event => event. === userInputDateValue);        // filtering our data and assigning to new variable
+    // let filteredData5 = tableData.filter(event => event.datetime === userInputDateValue);        // filtering our data and assigning to new variable
     // console.log(filteredData)           // Writing to console for debugging
 
     // Do basically the same thing as above, since we want to populate the table with the filtered data
     // Potential to create a single function that could just be called twice.
-    filteredData.forEach((ufo_event) => {     // This is the basic loop using forEach; using the arrow function here to define inline
+    filteredData2.forEach((ufo_event) => {     // This is the basic loop using forEach; using the arrow function here to define inline
         // console.log(ufo_event);                 // Just writing stuff out to console for debugging
         let row = tbody.append("tr");           // Variable that defines that when row is called it appends a new row to the table
         Object.entries(ufo_event).forEach(([key,value]) => {        // Using the arrow function here to define inline; its okay key is not used here
