@@ -54,17 +54,19 @@ filterButton.on("click", function() {               // Here we have the eventHan
         country: userInputCountryValue,
         shape: userInputShapeValue
     }
+    console.log(filter)
 
-    let filteredData1 = tableData.filter(event => event.datetime === userInputDateValue);        // filtering our data and assigning to new variable
-    let filteredData2 = tableData.filter(event => event.city === userInputCityValue);        // filtering our data and assigning to new variable
-    // let filteredData3 = tableData.filter(event => event.state === userInputDateStateValue);        // filtering our data and assigning to new variable
-    // let filteredData4 = tableData.filter(event => event. === userInputDateValue);        // filtering our data and assigning to new variable
-    // let filteredData5 = tableData.filter(event => event.datetime === userInputDateValue);        // filtering our data and assigning to new variable
-    // console.log(filteredData)           // Writing to console for debugging
+    filteredData = tableData.filter(function(item) {
+        for (var key in filter) {
+            if (item[key] === undefined || item[key] != filter[key])
+            return false;
+        }
+        return true;
+    });
 
     // Do basically the same thing as above, since we want to populate the table with the filtered data
     // Potential to create a single function that could just be called twice.
-    filteredData2.forEach((ufo_event) => {     // This is the basic loop using forEach; using the arrow function here to define inline
+    filteredData.forEach((ufo_event) => {     // This is the basic loop using forEach; using the arrow function here to define inline
         // console.log(ufo_event);                 // Just writing stuff out to console for debugging
         let row = tbody.append("tr");           // Variable that defines that when row is called it appends a new row to the table
         Object.entries(ufo_event).forEach(([key,value]) => {        // Using the arrow function here to define inline; its okay key is not used here
