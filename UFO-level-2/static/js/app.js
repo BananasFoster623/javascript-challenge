@@ -54,12 +54,13 @@ filterButton.on("click", function() {               // Here we have the eventHan
         country: userInputCountryValue,
         shape: userInputShapeValue
     }
-    console.log(filter)
 
     filteredData = tableData.filter(function(item) {
         for (var key in filter) {
-            if (item[key] === undefined || item[key] != filter[key])
-            return false;
+            if (filter[key] != "") {
+                if (item[key] === undefined || item[key] != filter[key])
+                return false;
+            }
         }
         return true;
     });
